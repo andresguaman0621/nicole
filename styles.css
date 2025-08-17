@@ -1,0 +1,232 @@
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Fondo y layout */
+body {
+  font-family: 'Georgia', serif;
+  background: linear-gradient(135deg, #ffeef8, #fff0f5, #f0f8ff, #fff5ee);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Corazones flotantes */
+.floating-heart {
+  position: fixed;
+  color: #ff69b4;
+  font-size: 20px;
+  animation: float 6s infinite linear;
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(100vh) rotate(0deg);
+    opacity: 0;
+  }
+  10% { opacity: 0.7; }
+  90% { opacity: 0.7; }
+  100% {
+    transform: translateY(-100px) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+/* Container principal */
+.container {
+  max-width: 800px;
+  width: 90%;
+  perspective: 1000px;
+  position: relative;
+  animation: slideIn 1s ease-out;
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(50px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Sobre */
+.envelope {
+  width: 100%;
+  max-width: 500px;
+  height: 300px;
+  margin: 0 auto;
+  position: relative;
+  cursor: pointer;
+  transition: all 0.8s ease;
+}
+
+.envelope-back {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #ffb6c1, #ffc0cb);
+  border-radius: 15px;
+  box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.envelope-front {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 41%;
+  background: linear-gradient(135deg, #ff91a4, #ffb6c1);
+  transform-origin: bottom;
+  transition: transform 1s ease;
+  border-radius: 15px 15px 0 0;
+  z-index: 10;
+}
+
+.envelope.opened .envelope-front {
+  transform: rotateX(-180deg);
+}
+
+/* Flores decorativas */
+.flower {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #fff, #ffb6c1);
+}
+
+.flower:nth-child(1) { top: 20px; right: 30px; animation: pulse 2s infinite; }
+.flower:nth-child(2) { bottom: 30px; left: 40px; animation: pulse 2s infinite 0.5s; }
+.flower:nth-child(3) { top: 50px; left: 20px; animation: pulse 2s infinite 1s; }
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+/* Texto del sobre */
+.envelope-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #8b4b6b;
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  z-index: 5;
+}
+
+.click-hint {
+  position: absolute;
+  bottom: -50px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #8b4b6b;
+  font-size: 16px;
+  animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+  40% { transform: translateX(-50%) translateY(-10px); }
+  60% { transform: translateX(-50%) translateY(-5px); }
+}
+
+/* Carta */
+.letter {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  min-height: 600px;
+  background: linear-gradient(145deg, #fffaf0, #fff8dc);
+  border-radius: 20px;
+  padding: 40px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+  transform: scale(0) translateY(50px);
+  opacity: 0;
+  transition: all 1.2s ease;
+  z-index: 15;
+  border: 2px solid #ffb6c1;
+}
+
+.letter.show {
+  transform: scale(1) translateY(0);
+  opacity: 1;
+}
+
+.letter h1 {
+  color: #8b4b6b;
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 2.5em;
+  font-family: 'Brush Script MT', cursive;
+}
+
+.letter p {
+  color: #5d4e75;
+  line-height: 1.8;
+  margin-bottom: 20px;
+  font-size: 16px;
+  text-align: justify;
+}
+
+.question {
+  background: linear-gradient(135deg, #ffb6c1, #ffc0cb);
+  padding: 20px;
+  border-radius: 15px;
+  text-align: center;
+  margin-top: 30px;
+  font-weight: bold;
+  font-size: 18px;
+  color: #8b4b6b;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+/* Botón cerrar */
+.close-btn {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  background: #ffb6c1;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  font-size: 20px;
+  color: #8b4b6b;
+  transition: all 0.3s ease;
+}
+
+.close-btn:hover {
+  background: #ff91a4;
+  transform: scale(1.1);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .container { width: 95%; }
+  .envelope { max-width: 400px; height: 250px; }
+  .envelope-text { font-size: 20px; }
+  .letter { padding: 25px; min-height: auto; }
+  .letter h1 { font-size: 2em; margin-bottom: 20px; }
+  .letter p { font-size: 14px; line-height: 1.6; }
+  .question { font-size: 16px; padding: 15px; }
+}
+
+@media (max-width: 480px) {
+  .envelope { max-width: 300px; height: 200px; }
+  .envelope-text { font-size: 18px; }
+  .letter { padding: 20px; }
+  .letter h1 { font-size: 1.8em; }
+  .letter p { font-size: 13px; }
+  .flower { width: 20px; height: 20px; }
+}
